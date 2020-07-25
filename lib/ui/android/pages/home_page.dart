@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:imc/blocs/imc_bloc.dart';
+import 'package:imc/ui/android/pages/resultado_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -101,22 +102,19 @@ class _HomePageState extends State<HomePage> {
             ),
             Padding(
               padding: EdgeInsets.all(20),
-              child: Text(
-                bloc.result,
-                textAlign: TextAlign.center,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(20),
               child: RaisedButton(
                 onPressed: () {
-                  setState(() {
-                    bloc.calculate();
-                  });
-                  /* Navigator.push(
+                  bloc.calculate();
+                  Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ResultadoPage()),
-                  ); */
+                    MaterialPageRoute(
+                      builder: (context) => ResultadoPage(
+                        mensagem: bloc.mensagem,
+                        resultado: bloc.resultado,
+                        cor: bloc.cor,
+                      ),
+                    ),
+                  );
                 },
                 shape: RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(15.0),
