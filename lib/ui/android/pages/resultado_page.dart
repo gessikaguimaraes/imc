@@ -4,8 +4,10 @@ class ResultadoPage extends StatefulWidget {
   final String mensagem;
   final String resultado;
   final Color cor;
+  final String pesoIdeal;
 
-  const ResultadoPage({Key key, this.mensagem, this.resultado, this.cor})
+  const ResultadoPage(
+      {Key key, this.mensagem, this.resultado, this.cor, this.pesoIdeal})
       : super(key: key);
 
   @override
@@ -49,7 +51,7 @@ class _ResultadoPageState extends State<ResultadoPage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 50,
+                          fontSize: 150,
                         ),
                       ),
                     ],
@@ -57,8 +59,14 @@ class _ResultadoPageState extends State<ResultadoPage> {
                 ),
               ),
             ),
-            Text("Peso ideal: 20 a 40 kg"),
-            RaisedButton(
+            Text(
+              "${widget.pesoIdeal}",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            /*  RaisedButton(
               onPressed: () {},
               shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(15.0),
@@ -71,7 +79,7 @@ class _ResultadoPageState extends State<ResultadoPage> {
                   fontSize: 20,
                 ),
               ),
-            ),
+            ), */
           ],
         ),
       ),

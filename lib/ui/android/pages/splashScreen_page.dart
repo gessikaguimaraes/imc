@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
-import 'package:imc/ui/android/pages/home_page.dart';
+import 'package:imc/ui/android/pages/sexo_page.dart';
 
 class SplashScreenPage extends StatefulWidget {
   @override
@@ -20,7 +20,7 @@ class _SplashScreenPageState extends State<SplashScreenPage>
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => SexoPage(),
         ),
       );
     });

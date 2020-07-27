@@ -4,16 +4,22 @@ import 'package:flutter_masked_text/flutter_masked_text.dart';
 class ImcBloc {
   var heightCtrl = new MaskedTextController(mask: '000');
   var weightCtrl = new MaskedTextController(mask: '000');
+  var idade = TextEditingController();
   var mensagem = "Preencha os dados para calcular seu IMC";
   var resultado = "";
+  String pesoIdeal = "";
   Color cor;
 
   calculate() {
     double weight = double.parse(weightCtrl.text);
     double height = double.parse(heightCtrl.text) / 100;
     double imc = weight / (height * height);
+    double pesoMinimo = height * height * 18.6;
+    double pesoMaximo = height * height * 24.9;
 
     resultado = "${imc.toStringAsPrecision(2)}";
+    pesoIdeal =
+        "Peso ideal: ${pesoMinimo.toStringAsPrecision(2)} a ${pesoMaximo.toStringAsPrecision(2)} kg";
 
     if (imc < 18.6) {
       mensagem = "Abaixo do Peso";
@@ -36,3 +42,17 @@ class ImcBloc {
     }
   }
 }
+/*
+Adulto: 20 a 59 anos
+criança: 6 meses a 19 anos
+
+Calculo IMC:
+imc = peso/(altura * altura)
+peso = (altura * altura)/imc
+
+Formula de Lorentz:
+P = h - 100 - (h-150)/k
+k =4, homem
+k=2, mulher
+h = altura em cm
+ */
