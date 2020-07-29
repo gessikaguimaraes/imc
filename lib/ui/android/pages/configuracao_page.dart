@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ConfiguracaoPage extends StatefulWidget {
   @override
@@ -6,6 +7,33 @@ class ConfiguracaoPage extends StatefulWidget {
 }
 
 class _ConfiguracaoPageState extends State<ConfiguracaoPage> {
+  TextEditingController controller = TextEditingController();
+  String meta;
+
+  Future<bool> save() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return await preferences.setString("meta", controller.text);
+  }
+
+  Future<String> load() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString("meta");
+  }
+
+  setData() {
+    load().then((value) {
+      setState(() {
+        meta = value;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    setData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
@@ -31,6 +59,7 @@ class _ConfiguracaoPageState extends State<ConfiguracaoPage> {
                   bottom: 4,
                 ),
                 child: TextFormField(
+                  controller: controller,
                   decoration: InputDecoration(
                     icon: Icon(
                       Icons.my_location,
@@ -43,7 +72,9 @@ class _ConfiguracaoPageState extends State<ConfiguracaoPage> {
               ),
               Container(
                 child: RaisedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    save();
+                  },
                   shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(15.0),
                   ),

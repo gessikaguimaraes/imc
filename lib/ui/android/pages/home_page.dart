@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:imc/blocs/imc_bloc.dart';
 import 'package:imc/ui/android/pages/resultado_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'configuracao_page.dart';
 
@@ -150,53 +151,51 @@ class _HomePageState extends State<HomePage> {
                 cursorColor: Colors.orange,
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: RaisedButton(
-                onPressed: () {
-                  if (bloc.heightCtrl.text == "") {
-                    _scaffoldKey.currentState.showSnackBar(
-                      SnackBar(
-                        content: Text("Informe a altura"),
-                        duration: Duration(seconds: 3),
-                        backgroundColor: Colors.orange,
+            FloatingActionButton.extended(
+              onPressed: () {
+                if (bloc.heightCtrl.text == "") {
+                  _scaffoldKey.currentState.showSnackBar(
+                    SnackBar(
+                      content: Text("Informe a altura"),
+                      duration: Duration(seconds: 3),
+                      backgroundColor: Colors.orange,
+                    ),
+                  );
+                } else if (bloc.weightCtrl.text == "") {
+                  _scaffoldKey.currentState.showSnackBar(
+                    SnackBar(
+                      content: Text("Informe o peso"),
+                      duration: Duration(seconds: 3),
+                      backgroundColor: Colors.orange,
+                    ),
+                  );
+                } else if (bloc.idade.text == "") {
+                  _scaffoldKey.currentState.showSnackBar(
+                    SnackBar(
+                      content: Text("Informe a idade"),
+                      duration: Duration(seconds: 3),
+                      backgroundColor: Colors.orange,
+                    ),
+                  );
+                } else {
+                  bloc.calculate();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ResultadoPage(
+                        mensagem: bloc.mensagem,
+                        resultado: bloc.resultado,
+                        cor: bloc.cor,
+                        pesoIdeal: bloc.pesoIdeal,
+                        formulaLorentz: bloc.formulaLorentz,
                       ),
-                    );
-                  } else if (bloc.weightCtrl.text == "") {
-                    _scaffoldKey.currentState.showSnackBar(
-                      SnackBar(
-                        content: Text("Informe o peso"),
-                        duration: Duration(seconds: 3),
-                        backgroundColor: Colors.orange,
-                      ),
-                    );
-                  } else {
-                    bloc.calculate();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ResultadoPage(
-                          mensagem: bloc.mensagem,
-                          resultado: bloc.resultado,
-                          cor: bloc.cor,
-                          pesoIdeal: bloc.pesoIdeal,
-                        ),
-                      ),
-                    );
-                  }
-                },
-                shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(15.0),
-                ),
-                color: Colors.orange,
-                child: Text(
-                  "Calcular",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
-              ),
+                    ),
+                  );
+                }
+              },
+              backgroundColor: Colors.orange,
+              label: Text('Calcular'),
+              elevation: 6,
             ),
           ],
         ),
