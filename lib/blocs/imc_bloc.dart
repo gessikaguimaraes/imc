@@ -63,6 +63,20 @@ class ImcBloc {
         mensagem = "Obesidade de Grau III";
         cor = Colors.red[900];
       }
+    } else if (imc > 60) {
+      if (imc <= 22) {
+        mensagem = "Abaixo do Peso";
+        cor = Colors.red;
+      } else if (imc > 22 && imc <= 27) {
+        mensagem = "Saudável";
+        cor = Colors.green;
+      } else if (imc > 27 && imc <= 30) {
+        mensagem = "Sobrepeso";
+        cor = Colors.orange;
+      } else if (imc > 30) {
+        mensagem = "Obesidade";
+        cor = Colors.red[700];
+      }
     }
   }
 }
