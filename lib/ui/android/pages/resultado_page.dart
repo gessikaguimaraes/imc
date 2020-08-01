@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'configuracao_page.dart';
+
 class ResultadoPage extends StatefulWidget {
   final String mensagem;
   final String resultado;
@@ -32,6 +34,17 @@ class _ResultadoPageState extends State<ResultadoPage> {
       appBar: AppBar(
         title: Text("Resultado"),
         backgroundColor: Colors.orange,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (_) => ConfiguracaoPage(),
+              );
+            },
+          ),
+        ],
       ),
       body: Container(
         child: Column(
@@ -107,13 +120,13 @@ class _ResultadoPageState extends State<ResultadoPage> {
                 ),
               ),
             ), */
-            Container(
+            /* Container(
               //height: 100,
               //color: Colors.orange,
               child: Text(
                 "* Observação: As informações do aplicativos é apenas para conferencia para saber qual é realmente seu peso ideal é necessário consultar um médico. ",
               ),
-            )
+            ) */
           ],
         ),
       ),

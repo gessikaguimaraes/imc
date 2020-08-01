@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:imc/ui/android/pages/home_page.dart';
 
+import 'configuracao_page.dart';
+
 class SexoPage extends StatefulWidget {
   @override
   _SexoPageState createState() => _SexoPageState();
@@ -16,7 +18,12 @@ class _SexoPageState extends State<SexoPage> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings),
-            onPressed: () {},
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (_) => ConfiguracaoPage(),
+              );
+            },
           ),
         ],
       ),

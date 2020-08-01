@@ -29,7 +29,21 @@ class ImcBloc {
     formulaLorentz = "Formula de Lorentz: ${formula.toStringAsPrecision(2)} kg";
 
     int i = int.parse(idade.text);
-    if (i >= 20 && i <= 59) {
+    if (i >= 1 && i <= 19) {
+      if (imc < 3) {
+        mensagem = "IMC Baixo";
+        cor = Colors.red;
+      } else if (imc >= 3 && imc < 85) {
+        mensagem = "IMC Adequado";
+        cor = Colors.green;
+      } else if (imc >= 85 && imc < 97) {
+        mensagem = "Sobrepeso";
+        cor = Colors.orange;
+      } else if (imc >= 97) {
+        mensagem = "Obesidade";
+        cor = Colors.red[700];
+      }
+    } else if (i >= 20 && i <= 59) {
       if (imc < 18.6) {
         mensagem = "Abaixo do Peso";
         cor = Colors.red;

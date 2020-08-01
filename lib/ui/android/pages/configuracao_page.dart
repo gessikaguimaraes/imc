@@ -8,7 +8,6 @@ class ConfiguracaoPage extends StatefulWidget {
 
 class _ConfiguracaoPageState extends State<ConfiguracaoPage> {
   TextEditingController controller = TextEditingController();
-  String meta;
 
   Future<bool> save() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
@@ -23,7 +22,7 @@ class _ConfiguracaoPageState extends State<ConfiguracaoPage> {
   setData() {
     load().then((value) {
       setState(() {
-        meta = value;
+        controller.text = value;
       });
     });
   }
