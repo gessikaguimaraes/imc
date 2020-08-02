@@ -4,12 +4,11 @@ import 'package:flutter/material.dart';
 class AdMobService {
   MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
     keywords: <String>[
-      "Games",
-      "beautiful apps",
+      "Peso",
+      "saudavel",
       "imc",
       "IMC",
     ],
-    // contentUrl: 'https://flutter.io',
     childDirected: false,
     testDevices: <String>[],
   );

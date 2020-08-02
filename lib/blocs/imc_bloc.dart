@@ -21,12 +21,12 @@ class ImcBloc {
 
     resultado = "${imc.toStringAsPrecision(2)}";
     pesoIdeal =
-        "Peso ideal: ${pesoMinimo.toStringAsPrecision(2)} a ${pesoMaximo.toStringAsPrecision(2)} kg";
+        "${pesoMinimo.toStringAsPrecision(2)} a ${pesoMaximo.toStringAsPrecision(2)} kg";
 
     double formula = double.parse(heightCtrl.text) -
         100 -
         (double.parse(heightCtrl.text) - 150) / k;
-    formulaLorentz = "Formula de Lorentz: ${formula.toStringAsPrecision(2)} kg";
+    formulaLorentz = "${formula.toStringAsPrecision(2)} kg";
 
     int i = int.parse(idade.text);
     if (i >= 1 && i <= 19) {

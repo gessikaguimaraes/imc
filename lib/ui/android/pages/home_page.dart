@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:imc/blocs/imc_bloc.dart';
 import 'package:imc/ui/android/pages/resultado_page.dart';
+import 'package:imc/ui/services/admob_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'configuracao_page.dart';
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    AdMobService().mostrarBanner();
     focusNodeAltura = FocusNode();
     focusNodePeso = FocusNode();
     focusNodeIdade = FocusNode();
@@ -28,6 +30,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
+    AdMobService().bannerAd.dispose();
     focusNodeAltura.dispose();
     focusNodePeso.dispose();
     focusNodeIdade.dispose();
@@ -54,150 +57,154 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: Container(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: TextFormField(
-                focusNode: focusNodeAltura,
-                onTap: () {
-                  setState(() {
-                    FocusScope.of(context).requestFocus(focusNodeAltura);
-                  });
-                },
-                controller: bloc.heightCtrl,
-                decoration: InputDecoration(
-                  //floatingLabelBehavior: FloatingLabelBehavior.never,
-                  labelText: "Altura (cm)",
-                  labelStyle: TextStyle(
-                    color: focusNodeAltura.hasFocus
-                        ? Colors.orange
-                        : Colors.black38,
+        child: SingleChildScrollView(
+          // padding: EdgeInsets.all(32),
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: TextFormField(
+                  focusNode: focusNodeAltura,
+                  onTap: () {
+                    setState(() {
+                      FocusScope.of(context).requestFocus(focusNodeAltura);
+                    });
+                  },
+                  controller: bloc.heightCtrl,
+                  decoration: InputDecoration(
+                    //floatingLabelBehavior: FloatingLabelBehavior.never,
+                    labelText: "Altura (cm)",
+                    labelStyle: TextStyle(
+                      color: focusNodeAltura.hasFocus
+                          ? Colors.orange
+                          : Colors.black38,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(color: Colors.orange),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(),
+                    ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    borderSide: BorderSide(color: Colors.orange),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    borderSide: BorderSide(),
-                  ),
+                  keyboardType: TextInputType.number,
+                  cursorColor: Colors.orange,
                 ),
-                keyboardType: TextInputType.number,
-                cursorColor: Colors.orange,
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: TextFormField(
-                focusNode: focusNodePeso,
-                onTap: () {
-                  setState(() {
-                    FocusScope.of(context).requestFocus(focusNodePeso);
-                  });
-                },
-                controller: bloc.weightCtrl,
-                decoration: InputDecoration(
-                  labelText: "Peso (kg)",
-                  labelStyle: TextStyle(
-                    color:
-                        focusNodePeso.hasFocus ? Colors.orange : Colors.black38,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    borderSide: BorderSide(color: Colors.orange),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    borderSide: BorderSide(
-                      color: Colors.orange,
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: TextFormField(
+                  focusNode: focusNodePeso,
+                  onTap: () {
+                    setState(() {
+                      FocusScope.of(context).requestFocus(focusNodePeso);
+                    });
+                  },
+                  controller: bloc.weightCtrl,
+                  decoration: InputDecoration(
+                    labelText: "Peso (kg)",
+                    labelStyle: TextStyle(
+                      color: focusNodePeso.hasFocus
+                          ? Colors.orange
+                          : Colors.black38,
                     ),
-                  ),
-                ),
-                keyboardType: TextInputType.number,
-                cursorColor: Colors.orange,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: TextFormField(
-                focusNode: focusNodeIdade,
-                onTap: () {
-                  setState(() {
-                    FocusScope.of(context).requestFocus(focusNodeIdade);
-                  });
-                },
-                controller: bloc.idade,
-                decoration: InputDecoration(
-                  labelText: "Idade (anos)",
-                  labelStyle: TextStyle(
-                    color: focusNodeIdade.hasFocus
-                        ? Colors.orange
-                        : Colors.black38,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    borderSide: BorderSide(color: Colors.orange),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    borderSide: BorderSide(
-                      color: Colors.orange,
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(color: Colors.orange),
                     ),
-                  ),
-                ),
-                keyboardType: TextInputType.number,
-                cursorColor: Colors.orange,
-              ),
-            ),
-            FloatingActionButton.extended(
-              onPressed: () {
-                if (bloc.heightCtrl.text == "") {
-                  _scaffoldKey.currentState.showSnackBar(
-                    SnackBar(
-                      content: Text("Informe a altura"),
-                      duration: Duration(seconds: 3),
-                      backgroundColor: Colors.orange,
-                    ),
-                  );
-                } else if (bloc.weightCtrl.text == "") {
-                  _scaffoldKey.currentState.showSnackBar(
-                    SnackBar(
-                      content: Text("Informe o peso"),
-                      duration: Duration(seconds: 3),
-                      backgroundColor: Colors.orange,
-                    ),
-                  );
-                } else if (bloc.idade.text == "") {
-                  _scaffoldKey.currentState.showSnackBar(
-                    SnackBar(
-                      content: Text("Informe a idade"),
-                      duration: Duration(seconds: 3),
-                      backgroundColor: Colors.orange,
-                    ),
-                  );
-                } else {
-                  bloc.calculate();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ResultadoPage(
-                        mensagem: bloc.mensagem,
-                        resultado: bloc.resultado,
-                        cor: bloc.cor,
-                        pesoIdeal: bloc.pesoIdeal,
-                        formulaLorentz: bloc.formulaLorentz,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(
+                        color: Colors.orange,
                       ),
                     ),
-                  );
-                }
-              },
-              backgroundColor: Colors.orange,
-              label: Text('Calcular'),
-              elevation: 6,
-            ),
-          ],
+                  ),
+                  keyboardType: TextInputType.number,
+                  cursorColor: Colors.orange,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: TextFormField(
+                  focusNode: focusNodeIdade,
+                  onTap: () {
+                    setState(() {
+                      FocusScope.of(context).requestFocus(focusNodeIdade);
+                    });
+                  },
+                  controller: bloc.idade,
+                  decoration: InputDecoration(
+                    labelText: "Idade (anos)",
+                    labelStyle: TextStyle(
+                      color: focusNodeIdade.hasFocus
+                          ? Colors.orange
+                          : Colors.black38,
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(color: Colors.orange),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                      borderSide: BorderSide(
+                        color: Colors.orange,
+                      ),
+                    ),
+                  ),
+                  keyboardType: TextInputType.number,
+                  cursorColor: Colors.orange,
+                ),
+              ),
+              FloatingActionButton.extended(
+                onPressed: () {
+                  if (bloc.heightCtrl.text == "") {
+                    _scaffoldKey.currentState.showSnackBar(
+                      SnackBar(
+                        content: Text("Informe a altura"),
+                        duration: Duration(seconds: 3),
+                        backgroundColor: Colors.orange,
+                      ),
+                    );
+                  } else if (bloc.weightCtrl.text == "") {
+                    _scaffoldKey.currentState.showSnackBar(
+                      SnackBar(
+                        content: Text("Informe o peso"),
+                        duration: Duration(seconds: 3),
+                        backgroundColor: Colors.orange,
+                      ),
+                    );
+                  } else if (bloc.idade.text == "") {
+                    _scaffoldKey.currentState.showSnackBar(
+                      SnackBar(
+                        content: Text("Informe a idade"),
+                        duration: Duration(seconds: 3),
+                        backgroundColor: Colors.orange,
+                      ),
+                    );
+                  } else {
+                    bloc.calculate();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ResultadoPage(
+                          mensagem: bloc.mensagem,
+                          resultado: bloc.resultado,
+                          cor: bloc.cor,
+                          pesoIdeal: bloc.pesoIdeal,
+                          formulaLorentz: bloc.formulaLorentz,
+                        ),
+                      ),
+                    );
+                  }
+                },
+                backgroundColor: Colors.orange,
+                label: Text('Calcular'),
+                elevation: 6,
+              ),
+            ],
+          ),
         ),
       ),
     );
