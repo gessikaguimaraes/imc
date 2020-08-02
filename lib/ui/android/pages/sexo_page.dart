@@ -1,7 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:imc/ui/android/pages/home_page.dart';
-
-import 'configuracao_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SexoPage extends StatefulWidget {
   @override
@@ -12,6 +13,31 @@ class _SexoPageState extends State<SexoPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool selectedHomem = false;
   bool selectedMulher = false;
+  String sexo;
+
+  Future<bool> save() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return await preferences.setString("sexo", sexo);
+  }
+
+  Future<String> load() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    return preferences.getString("sexo");
+  }
+
+  setData() {
+    load().then((value) {
+      setState(() {
+        sexo = value;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    setData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +49,6 @@ class _SexoPageState extends State<SexoPage> {
         title: Text("Selecione o sexo"),
         backgroundColor: Colors.orange[700],
         automaticallyImplyLeading: false,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (_) => ConfiguracaoPage(),
-              );
-            },
-          ),
-        ],
       ),
       body: Container(
         child: Column(
@@ -49,6 +64,7 @@ class _SexoPageState extends State<SexoPage> {
                       setState(() {
                         if (!selectedMulher) {
                           selectedHomem = !selectedHomem;
+                          sexo = "M";
                         }
                       });
                     },
@@ -74,6 +90,7 @@ class _SexoPageState extends State<SexoPage> {
                       setState(() {
                         if (!selectedHomem) {
                           selectedMulher = !selectedMulher;
+                          sexo = "M";
                         }
                       });
                     },
@@ -108,9 +125,12 @@ class _SexoPageState extends State<SexoPage> {
                     ),
                   );
                 } else {
+                  save();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(),
+                    ),
                   );
                 }
               },

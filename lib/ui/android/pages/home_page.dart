@@ -3,9 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:imc/blocs/imc_bloc.dart';
 import 'package:imc/ui/android/pages/resultado_page.dart';
 import 'package:imc/ui/services/admob_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'configuracao_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -44,23 +41,11 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Text("Calculadora IMC"),
         backgroundColor: Colors.orange,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (_) => ConfiguracaoPage(),
-              );
-            },
-          ),
-        ],
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         child: SingleChildScrollView(
-          // padding: EdgeInsets.all(32),
           child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.all(20),
@@ -73,7 +58,6 @@ class _HomePageState extends State<HomePage> {
                   },
                   controller: bloc.heightCtrl,
                   decoration: InputDecoration(
-                    //floatingLabelBehavior: FloatingLabelBehavior.never,
                     labelText: "Altura (cm)",
                     labelStyle: TextStyle(
                       color: focusNodeAltura.hasFocus

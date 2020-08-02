@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'configuracao_page.dart';
+import 'package:imc/ui/android/pages/sexo_page.dart';
+import 'package:imc/ui/services/admob_service.dart';
 
 class ResultadoPage extends StatefulWidget {
   final String mensagem;
@@ -34,17 +34,8 @@ class _ResultadoPageState extends State<ResultadoPage> {
       appBar: AppBar(
         title: Text("Resultado"),
         backgroundColor: Colors.orange[700],
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (_) => ConfiguracaoPage(),
-              );
-            },
-          ),
-        ],
+        automaticallyImplyLeading: false,
+        actions: <Widget>[],
       ),
       body: Container(
         child: Column(
@@ -74,82 +65,84 @@ class _ResultadoPageState extends State<ResultadoPage> {
                     Card(
                       color: widget.cor,
                       child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            ListTile(
-                              // leading: Icon(
-                              //   Icons.directions_car,
-                              //   color: Colors.red,
-                              // ),
-                              title: Text(
-                                "${widget.resultado}",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 125,
-                                ),
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ListTile(
+                            // leading: Icon(
+                            //   Icons.directions_car,
+                            //   color: Colors.red,
+                            // ),
+                            title: Text(
+                              "${widget.resultado}",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 125,
                               ),
                             ),
-                          ]),
+                          ),
+                        ],
+                      ),
                     ),
                     Card(
                       // color: widget.cor,
                       child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            ListTile(
-                              leading: Icon(
-                                Icons.fitness_center,
-                                color: Colors.orange[700],
-                              ),
-                              title: Text(
-                                "Peso ideal",
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              subtitle: Text(
-                                "${widget.pesoIdeal}",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                ),
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ListTile(
+                            leading: Icon(
+                              Icons.fitness_center,
+                              color: Colors.orange[700],
+                            ),
+                            title: Text(
+                              "Peso ideal",
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
                               ),
                             ),
-                          ]),
+                            subtitle: Text(
+                              "${widget.pesoIdeal}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Card(
-                      // color: widget.cor,
                       child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            ListTile(
-                              trailing: FittedBox(
-                                fit: BoxFit.fill,
-                              ),
-                              leading: Icon(
-                                Icons.functions,
-                                color: Colors.orange[700],
-                              ),
-                              title: Text(
-                                "Fórmula de Lorentz",
-                                style: TextStyle(
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                ),
-                              ),
-                              subtitle: Text(
-                                "${widget.formulaLorentz}",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20,
-                                ),
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          ListTile(
+                            trailing: FittedBox(
+                              fit: BoxFit.fill,
+                            ),
+                            leading: Icon(
+                              Icons.functions,
+                              color: Colors.orange[700],
+                            ),
+                            title: Text(
+                              "Fórmula de Lorentz",
+                              style: TextStyle(
+                                color: Colors.black87,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
                               ),
                             ),
-                          ]),
+                            subtitle: Text(
+                              "${widget.formulaLorentz}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 10, left: 5, right: 5),
@@ -158,57 +151,32 @@ class _ResultadoPageState extends State<ResultadoPage> {
                         textColor: Colors.white,
                         padding: EdgeInsets.all(10),
                         child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                "Calcular Novamente",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "Calcular Novamente",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
-                              // Icon(
-                              //   Icons.update,
-                              //   color: Colors.white,
-                              // ),
-                            ]),
+                            ),
+                          ],
+                        ),
                         onPressed: () {
+                          AdMobService().mostrarInterstitial(context);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SexoPage()),
+                          );
                           // Navigator.pushReplacementNamed(
                           //     context, RouteGeneretor.ROTA_HOME);
                         },
                       ),
                     ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Container(
-                      child: Text("Aqui ficara a regra da meta "),
-                    ),
                   ],
                 ),
               ),
             ),
-            /*  RaisedButton(
-              onPressed: () {},
-              shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(15.0),
-              ),
-              color: Colors.orange,
-              child: Text(
-                "Salvar",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-            ), */
-            /* Container(
-              //height: 100,
-              //color: Colors.orange,
-              child: Text(
-                "* Observação: As informações do aplicativos é apenas para conferencia para saber qual é realmente seu peso ideal é necessário consultar um médico. ",
-              ),
-            ) */
           ],
         ),
       ),
