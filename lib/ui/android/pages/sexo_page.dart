@@ -22,6 +22,7 @@ class _SexoPageState extends State<SexoPage> {
       appBar: AppBar(
         title: Text("Selecione o sexo"),
         backgroundColor: Colors.orange[700],
+        automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.settings),
