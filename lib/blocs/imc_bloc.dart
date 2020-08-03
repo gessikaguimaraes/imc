@@ -5,20 +5,19 @@ class ImcBloc {
   var heightCtrl = new MaskedTextController(mask: '000');
   var weightCtrl = new MaskedTextController(mask: '000');
   var idade = TextEditingController();
-  String sexo = "";
   String mensagem = "Preencha os dados para calcular seu IMC";
   String resultado = "";
   String pesoIdeal = "";
   Color cor;
   String formulaLorentz = "";
 
-  calculate() {
+  calculate(sexo) {
     double weight = double.parse(weightCtrl.text);
     double height = double.parse(heightCtrl.text) / 100;
     double imc = weight / (height * height);
     double pesoMinimo = height * height * 18.6;
     double pesoMaximo = height * height * 24.9;
-    int k = 2;
+    int k;
     if (sexo == "M") {
       k = 4;
     } else if (sexo == "F") {

@@ -1,8 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:imc/ui/android/pages/home_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SexoPage extends StatefulWidget {
   @override
@@ -14,30 +11,6 @@ class _SexoPageState extends State<SexoPage> {
   bool selectedHomem = false;
   bool selectedMulher = false;
   String sexo;
-
-  Future<bool> save() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    return await preferences.setString("sexo", sexo);
-  }
-
-  Future<String> load() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    return preferences.getString("sexo");
-  }
-
-  setData() {
-    load().then((value) {
-      setState(() {
-        sexo = value;
-      });
-    });
-  }
-
-  @override
-  void initState() {
-    setData();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,11 +98,10 @@ class _SexoPageState extends State<SexoPage> {
                     ),
                   );
                 } else {
-                  save();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HomePage(),
+                      builder: (context) => HomePage(sexo: sexo),
                     ),
                   );
                 }

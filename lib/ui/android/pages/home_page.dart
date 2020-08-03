@@ -5,6 +5,10 @@ import 'package:imc/ui/android/pages/resultado_page.dart';
 import 'package:imc/ui/services/admob_service.dart';
 
 class HomePage extends StatefulWidget {
+  final String sexo;
+
+  const HomePage({Key key, this.sexo}) : super(key: key);
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -168,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                   } else {
-                    bloc.calculate();
+                    bloc.calculate(widget.sexo);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
