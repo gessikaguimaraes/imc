@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:imc/ui/android/pages/sexo_page.dart';
@@ -42,10 +41,16 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            Image.asset("images/logo.png"),
-            Image.asset("images/empresa.png")
+            Container(
+              alignment: Alignment.center,
+              child: Image.asset("images/logo.png"),
+            ),
+            Container(
+              //alignment: Alignment.bottomCenter,
+              child: Image.asset("images/empresa.png"),
+            ),
           ],
         ),
       ),
