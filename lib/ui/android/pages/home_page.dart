@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
       key: _scaffoldKey,
       appBar: AppBar(
         title: Text("Calculadora IMC"),
-        backgroundColor: Colors.orange,
+        backgroundColor: Colors.orange[700],
         automaticallyImplyLeading: false,
       ),
       body: Container(
@@ -65,12 +65,12 @@ class _HomePageState extends State<HomePage> {
                     labelText: "Altura (cm)",
                     labelStyle: TextStyle(
                       color: focusNodeAltura.hasFocus
-                          ? Colors.orange
+                          ? Colors.orange[700]
                           : Colors.black38,
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
-                      borderSide: BorderSide(color: Colors.orange),
+                      borderSide: BorderSide(color: Colors.orange[700]),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   keyboardType: TextInputType.number,
-                  cursorColor: Colors.orange,
+                  cursorColor: Colors.orange[700],
                 ),
               ),
               Padding(
@@ -95,22 +95,22 @@ class _HomePageState extends State<HomePage> {
                     labelText: "Peso (kg)",
                     labelStyle: TextStyle(
                       color: focusNodePeso.hasFocus
-                          ? Colors.orange
+                          ? Colors.orange[700]
                           : Colors.black38,
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
-                      borderSide: BorderSide(color: Colors.orange),
+                      borderSide: BorderSide(color: Colors.orange[700]),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
                       borderSide: BorderSide(
-                        color: Colors.orange,
+                        color: Colors.orange[700],
                       ),
                     ),
                   ),
                   keyboardType: TextInputType.number,
-                  cursorColor: Colors.orange,
+                  cursorColor: Colors.orange[700],
                 ),
               ),
               Padding(
@@ -127,22 +127,22 @@ class _HomePageState extends State<HomePage> {
                     labelText: "Idade (anos)",
                     labelStyle: TextStyle(
                       color: focusNodeIdade.hasFocus
-                          ? Colors.orange
+                          ? Colors.orange[700]
                           : Colors.black38,
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
-                      borderSide: BorderSide(color: Colors.orange),
+                      borderSide: BorderSide(color: Colors.orange[700]),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
                       borderSide: BorderSide(
-                        color: Colors.orange,
+                        color: Colors.orange[700],
                       ),
                     ),
                   ),
                   keyboardType: TextInputType.number,
-                  cursorColor: Colors.orange,
+                  cursorColor: Colors.orange[700],
                 ),
               ),
               FloatingActionButton.extended(
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                       SnackBar(
                         content: Text("Informe a altura"),
                         duration: Duration(seconds: 3),
-                        backgroundColor: Colors.orange,
+                        backgroundColor: Colors.orange[700],
                       ),
                     );
                   } else if (bloc.weightCtrl.text == "") {
@@ -160,7 +160,7 @@ class _HomePageState extends State<HomePage> {
                       SnackBar(
                         content: Text("Informe o peso"),
                         duration: Duration(seconds: 3),
-                        backgroundColor: Colors.orange,
+                        backgroundColor: Colors.orange[700],
                       ),
                     );
                   } else if (bloc.idade.text == "") {
@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                       SnackBar(
                         content: Text("Informe a idade"),
                         duration: Duration(seconds: 3),
-                        backgroundColor: Colors.orange,
+                        backgroundColor: Colors.orange[700],
                       ),
                     );
                   } else {
@@ -187,7 +187,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   }
                 },
-                backgroundColor: Colors.orange,
+                backgroundColor: Colors.orange[700],
                 label: Text('Calcular'),
                 elevation: 6,
               ),

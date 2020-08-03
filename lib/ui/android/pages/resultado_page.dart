@@ -147,7 +147,7 @@ class _ResultadoPageState extends State<ResultadoPage> {
                     Padding(
                       padding: EdgeInsets.only(top: 10, left: 5, right: 5),
                       child: RaisedButton(
-                        color: Colors.orange,
+                        color: Colors.orange[700],
                         textColor: Colors.white,
                         padding: EdgeInsets.all(10),
                         child: Row(

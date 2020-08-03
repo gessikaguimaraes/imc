@@ -39,7 +39,7 @@ class _ConfiguracaoPageState extends State<ConfiguracaoPage> {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
-      backgroundColor: Colors.orange,
+      backgroundColor: Colors.orange[700],
       title: Text(
         "Configuração",
         textAlign: TextAlign.center,
@@ -77,7 +77,7 @@ class _ConfiguracaoPageState extends State<ConfiguracaoPage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(15.0),
                   ),
-                  color: Colors.orange,
+                  color: Colors.orange[700],
                   child: Text(
                     "Salvar",
                     style: TextStyle(

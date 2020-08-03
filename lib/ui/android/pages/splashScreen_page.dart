@@ -13,14 +13,14 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
   @override
   void initState() {
     super.initState();
-    /*  Future.delayed(Duration(seconds: 5)).then((value) {
+    Future.delayed(Duration(seconds: 5)).then((value) {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => SexoPage(),
         ),
       );
-    }); */
+    });
   }
 
   @override
@@ -45,7 +45,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.asset("images/logo.png"),
-            Image.asset("images/logo.png")
+            Image.asset("images/empresa.png")
           ],
         ),
       ),
