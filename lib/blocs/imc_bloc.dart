@@ -15,8 +15,8 @@ class ImcBloc {
     double weight = double.parse(weightCtrl.text);
     double height = double.parse(heightCtrl.text) / 100;
     double imc = weight / (height * height);
-    double pesoMinimo = height * height * 18.6;
-    double pesoMaximo = height * height * 24.9;
+    double pesoMinimo;
+    double pesoMaximo;
     int k;
     if (sexo == "M") {
       k = 4;
@@ -25,8 +25,6 @@ class ImcBloc {
     }
 
     resultado = "${imc.toStringAsPrecision(2)}";
-    pesoIdeal =
-        "${pesoMinimo.toStringAsPrecision(2)} a ${pesoMaximo.toStringAsPrecision(2)} kg";
 
     double formula = double.parse(heightCtrl.text) -
         100 -
@@ -35,6 +33,8 @@ class ImcBloc {
 
     int i = int.parse(idade.text);
     if (i >= 1 && i <= 19) {
+      pesoMinimo = height * height * 3;
+      pesoMaximo = height * height * 85;
       if (imc < 3) {
         mensagem = "IMC Baixo";
         cor = Colors.red;
@@ -49,6 +49,8 @@ class ImcBloc {
         cor = Colors.red[700];
       }
     } else if (i >= 20 && i <= 59) {
+      pesoMinimo = height * height * 18.6;
+      pesoMaximo = height * height * 24.9;
       if (imc < 18.6) {
         mensagem = "Abaixo do Peso";
         cor = Colors.red;
@@ -69,6 +71,8 @@ class ImcBloc {
         cor = Colors.red[900];
       }
     } else if (imc > 60) {
+      pesoMinimo = height * height * 22;
+      pesoMaximo = height * height * 27;
       if (imc <= 22) {
         mensagem = "Abaixo do Peso";
         cor = Colors.red;
@@ -83,6 +87,7 @@ class ImcBloc {
         cor = Colors.red[700];
       }
     }
+    pesoIdeal = "$pesoMinimo a $pesoMaximo kg";
   }
 }
 /*
@@ -91,7 +96,7 @@ criança: 6 meses a 19 anos
 
 Calculo IMC:
 imc = peso/(altura * altura)
-peso = (altura * altura)/imc
+peso = altura * altura *imc
 
 Formula de Lorentz:
 P = h - 100 - (h-150)/k
