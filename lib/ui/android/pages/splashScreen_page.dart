@@ -36,7 +36,7 @@ class _SplashScreenPageState extends State<SplashScreenPage> {
           gradient: LinearGradient(
             begin: Alignment.topRight,
             end: Alignment.bottomLeft,
-            colors: [Color(0xffED213A), Color(0xff93291E)],
+            colors: [Colors.blue[200], Colors.blue[900]],
           ),
         ),
         child: Column(
