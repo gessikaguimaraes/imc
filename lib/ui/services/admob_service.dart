@@ -1,5 +1,6 @@
 import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
+import 'package:imc/ui/android/pages/sexo_page.dart';
 
 class AdMobService {
   MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
@@ -17,7 +18,8 @@ class AdMobService {
 
   BannerAd createBannerAd() {
     return BannerAd(
-      adUnitId: BannerAd.testAdUnitId,
+      // adUnitId: BannerAd.testAdUnitId,
+      adUnitId: 'ca-app-pub-1556568734938950/8886761927',
       size: AdSize.smartBanner,
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
@@ -28,12 +30,16 @@ class AdMobService {
 
   InterstitialAd createInterstitialAd(BuildContext context) {
     return InterstitialAd(
-      adUnitId: InterstitialAd.testAdUnitId,
+      // adUnitId: InterstitialAd.testAdUnitId,
+      adUnitId: 'ca-app-pub-1556568734938950/4947516910',
       targetingInfo: targetingInfo,
       listener: (MobileAdEvent event) {
-        /*  if (event == MobileAdEvent.opened ||
-              event == MobileAdEvent.failedToLoad)
-            Navigator.pushNamed(context, "/opcoes"); */
+        if (event == MobileAdEvent.opened ||
+            event == MobileAdEvent.failedToLoad)
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SexoPage()),
+          );
       },
     );
   }
