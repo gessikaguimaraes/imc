@@ -77,7 +77,7 @@ class _ResultadoPageState extends State<ResultadoPage> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 125,
+                                fontSize: 80,
                               ),
                             ),
                           ),
@@ -164,10 +164,6 @@ class _ResultadoPageState extends State<ResultadoPage> {
                         ),
                         onPressed: () {
                           AdMobService().mostrarInterstitial(context);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => SexoPage()),
-                          );
                           // Navigator.pushReplacementNamed(
                           //     context, RouteGeneretor.ROTA_HOME);
                         },
