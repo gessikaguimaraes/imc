@@ -70,7 +70,7 @@ class ImcBloc {
         mensagem = "Obesidade de Grau III";
         cor = Colors.red[900];
       }
-    } else if (imc > 60) {
+    } else if (i > 60) {
       pesoMinimo = height * height * 22;
       pesoMaximo = height * height * 27;
       if (imc <= 22) {
